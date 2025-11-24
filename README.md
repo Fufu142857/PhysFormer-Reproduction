@@ -51,3 +51,8 @@ If you use the VIPL-HR datset, please cite:
            journal={IEEE Transactions on Image Processing},
            year={2019}
          }
+
+***
+# Reproduction
+- [Deep Analysis of PhysFormer](./docs/PhysFormer_Analysis.md) - My detailed breakdown and mind map of the paper.
+- [Innovation Ideas](./docs/Innovation_Ideas.md) - Proposed improvements.
