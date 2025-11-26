@@ -1,0 +1,10 @@
+# SRTP Data Protection
+*.mp4
+*.avi
+*.mat
+data/
+dataset/
+
+# Python cache
+__pycache__/
+*.pyc

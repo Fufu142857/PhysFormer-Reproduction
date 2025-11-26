@@ -55,4 +55,4 @@ If you use the VIPL-HR datset, please cite:
 ***
 # Reproduction
 - [Deep Analysis of PhysFormer](./docs/PhysFormer_Analysis.md) - My detailed breakdown and mind map of the paper.
-- [Innovation Ideas](./docs/Innovation_Ideas.md) - Proposed improvements.
+- [Record the Reproduction Work](./docs/Reproduction_Work.md) - My work record.
