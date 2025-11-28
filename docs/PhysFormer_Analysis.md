@@ -1,4 +1,6 @@
-# 专业名词
+# PhysNet
+
+### 专业名词
 
 - “Spatio-Temporal Networks” ([Yu 等, 2019](zotero://select/library/items/M2LH9M7H)) ([snapshot](zotero://open-pdf/library/items/JDIPGVXJ?sel=%23abs%20%3E%20h1)) 时空网络。
   
@@ -29,7 +31,7 @@
 - “recurrent neural network (RNN)” ([Yu 等, 2019, p. 3](zotero://select/library/items/M2LH9M7H)) ([pdf](zotero://open-pdf/library/items/GZ6YD62T?page=3)) 循环神经网络( RNN )。
   
 
-# 需要收集的数据
+## 需要收集的数据
 
 - HR是 heart rate，找 Average 的
   
@@ -42,15 +44,15 @@
 - “Peak Detection” ([Yu 等, 2019, p. 2](zotero://select/library/items/M2LH9M7H)) ([pdf](zotero://open-pdf/library/items/GZ6YD62T?page=2)) 峰值检测。
   
 - “inter-beat-interval (IBI)” ([Yu 等, 2019, p. 1](zotero://select/library/items/M2LH9M7H)) ([pdf](zotero://open-pdf/library/items/GZ6YD62T?page=1)) 拍间间隔( inter-beat- interval，IBI )。
-  
 
-# Introduction
+
+## Introduction
 
 - Figure 1 shows **frames and steps.**
   
 - **所以主要是 spatio-temporal networks 的贡献**
 
-# Related Work
+## Related Work
 
 > 领域内相关工作
 
@@ -67,7 +69,7 @@
         - RNN：循环神经网络
           
 
-# 理论推导
+## 理论推导
 
 > spatio-temporal modeling and loss functions 时空建模方法和损失函数
 
@@ -130,7 +132,7 @@
   >                nn.ReLU(inplace=True),
   >                nn.MaxPool3d((1, 2, 2), stride=(1, 2, 2)),
   >            )
-  >                     
+  >                        
   >            self.Stem1 = nn.Sequential(
   >                nn.Conv3d(dim//4, dim//2, [3, 3, 3], stride=1, padding=1),
   >                nn.BatchNorm3d(dim//2),
