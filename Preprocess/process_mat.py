@@ -86,7 +86,7 @@ def process(MAT_FILE):
                 face_crop = img_rgb[y1:y2, x1:x2]
                 # 调整尺寸 到 128x128
                 if face_crop.size > 0:
-                    final_img = cv2.resize(face_crop, TARGET_SIZE, interpolation=cv2.INTER_CUBIC)
+                    final_img = cv2.resize(face_crop, TARGET_SIZE,interpolation=cv2.INTER_CUBIC)
             if final_img is None:
                 log(f"第 {i+j+1} 帧未检测到人脸，复制前一帧。")
                 if last_valid_face is not None:
