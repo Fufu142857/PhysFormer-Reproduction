@@ -5,26 +5,34 @@ This repository is an **unofficial reproduction** of the CVPR 2022 paper **PhysF
 The original code is forked from [ZitongYu/PhysFormer](https://github.com/ZitongYu/PhysFormer).
 
 ## 🚀 Project Goal
-The primary goal of this project is to verify the performance of the PhysFormer model on the challenging MMPD dataset. We strictly follow the **evaluation protocols and preprocessing pipelines** proposed in the recent state-of-the-art work, **RhythmFormer**.
+The primary goal of this project is to verify the performance of the PhysFormer model on the challenging MMPD dataset. I strictly follow the **evaluation protocols and preprocessing pipelines** proposed in the recent state-of-the-art work, **RhythmFormer**.
 
-## 🛠️ Acknowledgements
+## 📄 My Reproduction Work
 
-This reproduction involves three key components. We explicitly acknowledge and credit the following works for their contributions to the community:
+Detailed documentation of my reproduction process, experimental analysis, and code modifications explanation can be found here: 
+👉 **[Reproduction_Work.md](./docs/Reproduction_Work.md)** 
+
+> **Note1:** A **project file tree** highlighting the new and modified code files (vs. the original `PhysFormer`) is provided at the beginning of the document.
+>  *Note2: Documentation is written in Chinese 🇨🇳*
+
+## Acknowledgements
+
+This reproduction involves three key components. I explicitly acknowledge and credit the following works for their contributions to the community:
 
 ### 1. Model Architecture (Original Work)
 * **Source:** [PhysFormer: Facial Video-based Physiological Measurement with Temporal Difference Transformer](https://github.com/ZitongYu/PhysFormer)
-* **Usage:** We use the original model provided by Yu et al.
+* **Usage:** I use the original model provided by Yu et al.
 
 ### 2. Evaluation Protocol
 * **Source:** [RhythmFormer: Extracting Patterned rPPG Signals based on Periodic Sparse Attention](https://arxiv.org/abs/2402.12788)
-* **Usage:** We strictly follow the experimental setting described in the RhythmFormer paper:
+* **Usage:** I strictly follow the experimental setting described in the RhythmFormer paper:
     * **Dataset:** mini-MMPD.
     * **Data Split:** Sequential split with 7:1:2 ratio (Train:Val:Test).
     * **Preprocessing:** Facial region cropped and resized to 128x128 in the first frame, fixed for subsequent frames.
 
 ### 3. Data Preprocessing Tools
 * **Source:** [rPPG-Toolbox](https://github.com/ubicomplab/rPPG-Toolbox)
-* **Usage:** We utilize the robust data loading and preprocessing pipelines from rPPG-Toolbox to handle the MMPD dataset format and generate inputs compatible with PhysFormer.
+* **Usage:** I utilize the robust data loading and preprocessing pipelines from rPPG-Toolbox to handle the MMPD dataset format and generate inputs compatible with PhysFormer.
 
 ## 📝 References
 
@@ -51,7 +59,7 @@ If you find this reproduction work record useful, please cite the original autho
 
 **2. RhythmFormer:**
 
-> *We followed the data split and preprocessing protocol defined in RhythmFormer.*
+> *I followed the data split and preprocessing protocol defined in RhythmFormer.*
 
 ```
 @article{zou2025rhythmformer,
@@ -70,7 +78,7 @@ If you find this reproduction work record useful, please cite the original autho
 
 **3. rPPG-Toolbox:**
 
-> *We used rPPG-Toolbox for data loading and processing.*
+> *I used rPPG-Toolbox for data loading and processing.*
 
 ```
 @article{liu2022rppg,
