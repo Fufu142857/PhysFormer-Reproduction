@@ -28,7 +28,7 @@ This reproduction involves three key components. We explicitly acknowledge and c
 
 ## 📝 References
 
-If you find this reproduction repository useful, please cite the original authors, the evaluation protocol provider, and the toolbox developers:
+If you find this reproduction work record useful, please cite the original authors, the evaluation protocol provider, and the toolbox developers:
 
 **1. PhysFormer:**
 
