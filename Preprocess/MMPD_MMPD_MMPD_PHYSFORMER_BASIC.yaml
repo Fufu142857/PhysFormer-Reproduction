@@ -1,0 +1,153 @@
+# MMPD_MMPD_MMPD_PHYSFORMER_BASIC.yaml
+BASE: [""]
+TOOLBOX_MODE: "train_and_test" # 对应 "leveraged the rPPG toolbox"
+
+TRAIN:
+  BATCH_SIZE: 2 # 对应 "Batch size was set to 4"
+  EPOCHS: 30 # 对应 "spanned 30 epochs"
+  LR: 9e-3 # 对应 "Learning rate was set to 9e-3"
+  MODEL_FILE_NAME: MMPD_PhysFormer_Reproduction
+  PLOT_LOSSES_AND_LR: True
+
+  DATA:
+    FS: 30
+    DATASET: MMPD
+    DO_PREPROCESS: False # 第一次运行必须为 True
+    DATA_FORMAT: NCDHW
+    DATA_PATH: "./data/MMPD" # 请确认你的路径
+    CACHED_PATH: "./preprocessed_MMPD"
+    EXP_DATA_NAME: "MMPD_SizeW128_SizeH128_ClipLength160_DataTypeStandardized_DataAugNone_LabelTypeStandardized_Crop_faceTrue_BackendHC_Large_boxTrue_Large_size1.5_Dyamic_DetFalse_det_len30_Median_face_boxFalse"
+
+    # [核心] 训练集占 70% (0.0 - 0.7)
+    BEGIN: 0.0
+    END: 0.7
+
+    INFO:
+      LIGHT: [1, 2, 3, 4] # 1:LED-Low, 2:LED-high, 3:Incandescent, 4:Nature
+      MOTION: [1, 2, 3, 4] # 1:Stationary, 2:Rotation, 3:Talking, 4:Walking
+      EXERCISE: [1, 2] # 1:True (After exercise), 2:False (Before)
+      SKIN_COLOR: [3, 4, 5, 6] # ⚠️ 注意！MMPD 论文说只有肤色 3-6，不要写 1,2
+      GENDER: [1, 2] # 1:Male, 2:Female
+      GLASSER: [1, 2] # 1:戴眼镜, 2:不戴
+      HAIR_COVER: [1, 2] # 1:刘海遮挡, 2:无遮挡
+      MAKEUP: [1, 2] # 1:化妆, 2:素颜
+
+    PREPROCESS:
+      DATA_TYPE: ["Standardized"]
+      DATA_AUG: ["None"]
+      LABEL_TYPE: Standardized
+      DO_CHUNK: True
+      CHUNK_LENGTH: 160 # PhysFormer 标准长度
+      CROP_FACE:
+        DO_CROP_FACE: True
+        BACKEND: "HC" # 或者 'MTCNN' (取决于环境，HC更快，论文暗示MTCNN)
+        USE_LARGE_FACE_BOX: True
+        LARGE_BOX_COEF: 1.5
+        DETECTION:
+          # [核心] "region was fixed in subsequent frames" -> 必须 False
+          DO_DYNAMIC_DETECTION: False
+          DYNAMIC_DETECTION_FREQUENCY: 30
+          USE_MEDIAN_FACE_BOX: False
+      RESIZE:
+        H: 128 # 对应 "128x128 pixels"
+        W: 128
+
+VALID:
+  DATA:
+    FS: 30
+    DATASET: MMPD
+    DO_PREPROCESS: False # 保持一致
+    DATA_FORMAT: NCDHW
+    DATA_PATH: "./data/MMPD"
+    CACHED_PATH: "./preprocessed_MMPD"
+    EXP_DATA_NAME: "MMPD_SizeW128_SizeH128_ClipLength160_DataTypeStandardized_DataAugNone_LabelTypeStandardized_Crop_faceTrue_BackendHC_Large_boxTrue_Large_size1.5_Dyamic_DetFalse_det_len30_Median_face_boxFalse"
+    # [核心] 验证集占 10% (0.7 - 0.8)
+    BEGIN: 0.7
+    END: 0.8
+
+    INFO:
+      LIGHT: [1, 2, 3, 4] # 1:LED-Low, 2:LED-high, 3:Incandescent, 4:Nature
+      MOTION: [1, 2, 3, 4] # 1:Stationary, 2:Rotation, 3:Talking, 4:Walking
+      EXERCISE: [1, 2] # 1:True (After exercise), 2:False (Before)
+      SKIN_COLOR: [3, 4, 5, 6] # ⚠️ 注意！MMPD 论文说只有肤色 3-6，不要写 1,2
+      GENDER: [1, 2] # 1:Male, 2:Female
+      GLASSER: [1, 2] # 1:戴眼镜, 2:不戴
+      HAIR_COVER: [1, 2] # 1:刘海遮挡, 2:无遮挡
+      MAKEUP: [1, 2] # 1:化妆, 2:素颜
+
+    PREPROCESS:
+      DATA_TYPE: ["Standardized"]
+      DATA_AUG: ["None"]
+      LABEL_TYPE: Standardized
+      DO_CHUNK: True
+      CHUNK_LENGTH: 160 # PhysFormer 标准长度
+      CROP_FACE:
+        DO_CROP_FACE: True
+        BACKEND: "HC" # 或者 'MTCNN' (取决于环境，HC更快，论文暗示MTCNN)
+        USE_LARGE_FACE_BOX: True
+        LARGE_BOX_COEF: 1.5
+        DETECTION:
+          # [核心] "region was fixed in subsequent frames" -> 必须 False
+          DO_DYNAMIC_DETECTION: False
+          DYNAMIC_DETECTION_FREQUENCY: 30
+          USE_MEDIAN_FACE_BOX: False
+      RESIZE:
+        H: 128
+        W: 128
+
+TEST:
+  METRICS: ["MAE", "RMSE", "MAPE", "Pearson", "SNR"]
+  USE_LAST_EPOCH: False # 论文没说用 Last，通常默认用 Best
+  DATA:
+    FS: 30
+    DATASET: MMPD
+    DO_PREPROCESS: False
+    DATA_FORMAT: NCDHW
+    DATA_PATH: "./data/MMPD"
+    CACHED_PATH: "./preprocessed_MMPD"
+    EXP_DATA_NAME: "MMPD_SizeW128_SizeH128_ClipLength160_DataTypeStandardized_DataAugNone_LabelTypeStandardized_Crop_faceTrue_BackendHC_Large_boxTrue_Large_size1.5_Dyamic_DetFalse_det_len30_Median_face_boxFalse"
+
+    # 虚假测试集
+    BEGIN: 0.7
+    END: 0.8
+
+    INFO:
+      LIGHT: [1, 2, 3, 4] # 1:LED-Low, 2:LED-high, 3:Incandescent, 4:Nature
+      MOTION: [1, 2, 3, 4] # 1:Stationary, 2:Rotation, 3:Talking, 4:Walking
+      EXERCISE: [1, 2] # 1:True (After exercise), 2:False (Before)
+      SKIN_COLOR: [3, 4, 5, 6] # ⚠️ 注意！MMPD 论文说只有肤色 3-6，不要写 1,2
+      GENDER: [1, 2] # 1:Male, 2:Female
+      GLASSER: [1, 2] # 1:戴眼镜, 2:不戴
+      HAIR_COVER: [1, 2] # 1:刘海遮挡, 2:无遮挡
+      MAKEUP: [1, 2] # 1:化妆, 2:素颜
+
+    PREPROCESS:
+      DATA_TYPE: ["Standardized"]
+      DATA_AUG: ["None"]
+      LABEL_TYPE: Standardized
+      DO_CHUNK: True
+      CHUNK_LENGTH: 160 # PhysFormer 标准长度
+      CROP_FACE:
+        DO_CROP_FACE: True
+        BACKEND: "HC" # 或者 'MTCNN' (取决于环境，HC更快，论文暗示MTCNN)
+        USE_LARGE_FACE_BOX: True
+        LARGE_BOX_COEF: 1.5
+        DETECTION:
+          # [核心] "region was fixed in subsequent frames" -> 必须 False
+          DO_DYNAMIC_DETECTION: False
+          DYNAMIC_DETECTION_FREQUENCY: 30
+          USE_MEDIAN_FACE_BOX: False
+      RESIZE:
+        H: 128
+        W: 128
+
+MODEL:
+  DROP_RATE: 0.2
+  NAME: PhysFormer # 或者是 RhythmFormer，看你要跑哪个
+
+INFERENCE:
+  BATCH_SIZE: 2
+  EVALUATION_METHOD: "FFT" # 对应 "Welch algorithm ... power spectral density"
+  EVALUATION_WINDOW:
+    USE_SMALLER_WINDOW: False
+    WINDOW_SIZE: 10
