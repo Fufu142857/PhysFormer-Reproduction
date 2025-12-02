@@ -1,4 +1,4 @@
-# MMPD_MMPD_MMPD_PHYSFORMER_BASIC.yaml
+# PURE_PURE_PURE_PHYSFORMER_BASIC.yaml
 BASE: [""]
 TOOLBOX_MODE: "train_and_test" 
 
@@ -7,86 +7,28 @@ TRAIN:
   BATCH_SIZE: 2           # Adjusting for 4060(8G)  
   EPOCHS: 30              # "the training process spanned 30 epochs"
   LR: 9e-3                # "learning rate was set to 9e-3"
-  MODEL_FILE_NAME: MMPD_PhysFormer_Reproduction
+  MODEL_FILE_NAME: PURE_PhysFormer_Reproduction
   PLOT_LOSSES_AND_LR: True
 
   # Data settings
   DATA:
     FS: 30                  # "a frame rate of 30 fps"
-    DATASET: MMPD           # Choose DATA
+    DATASET: PURE           # Choose DATA
     DO_PREPROCESS: True   
     DATA_FORMAT: NCDHW      # To fix data's format
     # Raw data path
-    DATA_PATH: "./data/MMPD" 
+    DATA_PATH: "./data/PURE" 
     # Store the preprocessed data
-    CACHED_PATH: "./preprocessed_MMPD"
+    CACHED_PATH: "./preprocessed_PURE"
     # Let the box gener
     EXP_DATA_NAME: ""
 
-    # Training use first 7/10
+    # Training use first 6/10
     BEGIN: 0.0
-    END: 0.7
+    END: 0.6
 
     # Fix the data information
     INFO:
-      LIGHT: [1, 2, 3, 4]     # "lighting conditions (LED-high, LED-low, incandescent, natural)"
-      MOTION: [1, 2, 3, 4]    # "different activities (static, head rotation, speech, and walking)" 
-      SKIN_COLOR: [3, 4, 5, 6] # "Fitzpatrick skin types 3-6"
-      EXERCISE: [1, 2]        # All situation needed
-      GENDER: [1, 2]          # All situation needed
-      GLASSER: [1, 2]         # All situation needed
-      HAIR_COVER: [1, 2]      # All situation needed
-      MAKEUP: [1, 2]          # All situation needed
-
-    # Training data preprocessing
-    PREPROCESS:
-      # Do data augmentation in other code
-      DATA_AUG: ["None"]
-      DATA_TYPE: ["Standardized"]
-      LABEL_TYPE: Standardized
-      # Open chunk per 160
-      DO_CHUNK: True
-      CHUNK_LENGTH: 160 
-      # Face detect then crop
-      CROP_FACE:
-        DO_CROP_FACE: True
-        # HC(Haar Cascade) method in box(no mctnn)
-        BACKEND: "HC" 
-        USE_LARGE_FACE_BOX: True
-        LARGE_BOX_COEF: 1.5
-        DETECTION:
-          # "this region was fixed in the subsequent frames"
-          DO_DYNAMIC_DETECTION: False
-          DYNAMIC_DETECTION_FREQUENCY: 30 # Not used
-          USE_MEDIAN_FACE_BOX: False      # Not used
-      # "resized to 128 * 128"
-      RESIZE:
-        H: 128 
-        W: 128
-
-# Validing Part
-VALID:
-  DATA:
-    FS: 30                  # "a frame rate of 30 fps"
-    DATASET: MMPD           # Choose DATA
-    DO_PREPROCESS: True   
-    DATA_FORMAT: NCDHW      # To fix data's format
-    # Raw data path
-    DATA_PATH: "./data/MMPD" 
-    # Store the preprocessed data
-    CACHED_PATH: "./preprocessed_MMPD"
-    # Let the box gener
-    EXP_DATA_NAME: ""
-
-    # Valid use 1 in 7:1:2
-    BEGIN: 0.7
-    END: 0.8
-
-    # Fix the data information
-    INFO:
-      LIGHT: [1, 2, 3, 4]     # "lighting conditions (LED-high, LED-low, incandescent, natural)"
-      MOTION: [1, 2, 3, 4]    # "different activities (static, head rotation, speech, and walking)" 
-      SKIN_COLOR: [3, 4, 5, 6] # "Fitzpatrick skin types 3-6"
       EXERCISE: [1, 2]        # All situation needed
       GENDER: [1, 2]          # All situation needed
       GLASSER: [1, 2]         # All situation needed
@@ -124,30 +66,27 @@ TEST:
   # Record performance metrics
   METRICS: ["MAE", "RMSE", "MAPE", "Pearson", "SNR"]
   # Use best or last, can use both to enrich results
-  USE_LAST_EPOCH: False 
-  # USE_LAST_EPOCH: True
+  # USE_LAST_EPOCH: False 
+  USE_LAST_EPOCH: True
   
   DATA:
     FS: 30                  # "a frame rate of 30 fps"
-    DATASET: MMPD           # Choose DATA
+    DATASET: PURE           # Choose DATA
     DO_PREPROCESS: True   
     DATA_FORMAT: NCDHW      # To fix data's format
     # Raw data path
-    DATA_PATH: "./data/MMPD" 
+    DATA_PATH: "./data/PURE" 
     # Store the preprocessed data
-    CACHED_PATH: "./preprocessed_MMPD"
+    CACHED_PATH: "./preprocessed_PURE"
     # Let the box gener
     EXP_DATA_NAME: ""
 
-    # Test use 2 in 7:1:2
-    BEGIN: 0.8
+    # Test use post 0.4
+    BEGIN: 0.6
     END: 1.0
 
     # Fix the data information
     INFO:
-      LIGHT: [1, 2, 3, 4]     # "lighting conditions (LED-high, LED-low, incandescent, natural)"
-      MOTION: [1, 2, 3, 4]    # "different activities (static, head rotation, speech, and walking)" 
-      SKIN_COLOR: [3, 4, 5, 6] # "Fitzpatrick skin types 3-6"
       EXERCISE: [1, 2]        # All situation needed
       GENDER: [1, 2]          # All situation needed
       GLASSER: [1, 2]         # All situation needed
@@ -182,7 +121,7 @@ TEST:
 
 # Model settings
 MODEL:
-  DROP_RATE: 0.2          # Used for impliicated dataset like MMPD
+  DROP_RATE: 0.1          # Used for impliicated dataset like MMPD
   NAME: PhysFormer        # Choose architecture
 
 INFERENCE:

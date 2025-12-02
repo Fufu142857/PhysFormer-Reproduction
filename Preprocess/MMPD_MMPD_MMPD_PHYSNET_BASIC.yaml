@@ -1,4 +1,4 @@
-# MMPD_MMPD_MMPD_PHYSFORMER_BASIC.yaml
+# MMPD_MMPD_MMPD_PHYSNET_BASIC.yaml
 BASE: [""]
 TOOLBOX_MODE: "train_and_test" 
 
@@ -7,7 +7,7 @@ TRAIN:
   BATCH_SIZE: 2           # Adjusting for 4060(8G)  
   EPOCHS: 30              # "the training process spanned 30 epochs"
   LR: 9e-3                # "learning rate was set to 9e-3"
-  MODEL_FILE_NAME: MMPD_PhysFormer_Reproduction
+  MODEL_FILE_NAME: MMPD_PhysNet_Reproduction
   PLOT_LOSSES_AND_LR: True
 
   # Data settings
@@ -140,8 +140,9 @@ TEST:
     EXP_DATA_NAME: ""
 
     # Test use 2 in 7:1:2
-    BEGIN: 0.8
-    END: 1.0
+    # Fake test
+    BEGIN: 0.7
+    END: 0.8
 
     # Fix the data information
     INFO:
@@ -183,7 +184,7 @@ TEST:
 # Model settings
 MODEL:
   DROP_RATE: 0.2          # Used for impliicated dataset like MMPD
-  NAME: PhysFormer        # Choose architecture
+  NAME: PhysNet           # Choose architecture
 
 INFERENCE:
   BATCH_SIZE: 2           # Adjusting for 4060(8G)  
