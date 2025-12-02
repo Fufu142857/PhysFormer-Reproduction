@@ -28,3 +28,33 @@
 + 写关于 `7-2-1` **MMPD** 的 `.yaml` 配置 处理数据
 
 + 开始处理数据：`python main.py --config_file ./configs/train_configs/MMPD_MMPD_MMPD_PHYSFORMER_BASIC.yaml`
+
+### Coding
+
++ `.yaml`
+
++ `main.py` 要改多线程调整成 4
+
++ 修改 `neural_methods\trainer\PhysFormerTrainer.py`（我们要训练的模型模块）
+
+  > 跑physnet前也要注意改这个，梯度+增强
+
+### 训练模型
+
++ 打开所有环境
+
+  ```shell
+  # win+R, input 'd' then enter
+  cd rPPG-Toolbox
+  conda activate pytorch_env
+  set PYTHONUTF8=1
+  set PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
+  ```
+
++ 输入指令
+
+  ```shell
+  python main.py --config_file ./configs/train_configs/MMPD_MMPD_MMPD_PHYSFORMER_BASIC.yaml
+  ```
+
+  
