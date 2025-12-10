@@ -122,7 +122,7 @@ VALID:
 # Testing Part
 TEST:
   # Record performance metrics
-  METRICS: ["MAE", "RMSE", "MAPE", "Pearson", "SNR"]
+  METRICS: ["MAE", "RMSE", "MAPE", "Pearson", "SNR", "BA"]
   # Use best or last, can use both to enrich results
   USE_LAST_EPOCH: False 
   # USE_LAST_EPOCH: True
